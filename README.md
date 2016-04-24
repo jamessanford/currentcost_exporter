@@ -6,6 +6,10 @@ Defaults to `-dev /dev/ttyUSB0 -baud 57600`
 
     go get -u github.com/jamessanford/currentcost_exporter
 
+#### Screenshot in Grafana
+
+![grafana](http://i.imgur.com/EOuHO5y.png)
+
 #### Metrics exported
 
 ```
