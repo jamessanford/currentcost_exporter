@@ -116,7 +116,7 @@ func main() {
 	}()
 
 	http.HandleFunc("/", func(w http.ResponseWriter, _ *http.Request) {
-		io.WriteString(w, "currentcost-exporter\n")
+		io.WriteString(w, "currentcost_exporter\n")
 	})
 	http.Handle("/metrics", prometheus.Handler())
 	log.Infof("listening on %v", *httpAddr)

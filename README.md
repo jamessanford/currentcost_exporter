@@ -4,7 +4,7 @@ Defaults to `-dev /dev/ttyUSB0 -baud 57600`
 
 #### Install
 
-    go get -u github.com/jamessanford/currentcost-exporter
+    go get -u github.com/jamessanford/currentcost_exporter
 
 #### Metrics exported
 
