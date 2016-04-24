@@ -1,4 +1,4 @@
-**Current Cost CC128 real-time power usage exporter for Prometheus**
+**Current Cost CC128 real-time power usage exporter for [Prometheus](https://github.com/prometheus/prometheus)**
 
 Defaults to `-dev /dev/ttyUSB0 -baud 57600`
 
