@@ -27,6 +27,7 @@ var (
 type wattUsage struct {
 	// use strings so setGauge() can check for presence vs zero
 	XMLName xml.Name `xml:"msg"`
+	TempC   string   `xml:"tmpr"`
 	TempF   string   `xml:"tmprF"`
 	Watts1  string   `xml:"ch1>watts"`
 	Watts2  string   `xml:"ch2>watts"`
@@ -41,6 +42,7 @@ func updateMetrics(tr trace.Trace, w *wattUsage) {
 			tr.SetError()
 		}
 	}
+	e(setGauge(tempC, w.TempC))
 	e(setGauge(tempF, w.TempF))
 	e(setGauge(watts.WithLabelValues("ch1"), w.Watts1))
 	e(setGauge(watts.WithLabelValues("ch2"), w.Watts2))

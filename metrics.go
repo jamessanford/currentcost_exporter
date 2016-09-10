@@ -8,6 +8,12 @@ import (
 
 // collected data
 var (
+	tempC = prometheus.NewGauge(
+		prometheus.GaugeOpts{
+			Name: "temperature_c",
+			Help: "temperature in degrees celsius",
+		})
+
 	tempF = prometheus.NewGauge(
 		prometheus.GaugeOpts{
 			Name: "temperature_f",
