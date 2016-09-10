@@ -25,6 +25,7 @@ var (
 )
 
 type wattUsage struct {
+	// use strings so setGauge() can check for presence vs zero
 	XMLName xml.Name `xml:"msg"`
 	TempF   string   `xml:"tmprF"`
 	Watts1  string   `xml:"ch1>watts"`
@@ -111,12 +112,14 @@ func main() {
 	go func() {
 		for {
 			readInput()
+			// readInput only returns in case of failure.
+			// On failure, back off before retrying.
 			time.Sleep(1 * time.Second)
 		}
 	}()
 
 	http.HandleFunc("/", func(w http.ResponseWriter, _ *http.Request) {
-		io.WriteString(w, "currentcost_exporter\n")
+		_, _ = io.WriteString(w, "currentcost_exporter\n")
 	})
 	http.Handle("/metrics", prometheus.Handler())
 	log.Infof("listening on %v", *httpAddr)
