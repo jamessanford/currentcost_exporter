@@ -54,7 +54,9 @@ func parseWattLine(d []byte) {
 	tr := trace.New("parseWattLine", "xml")
 	defer tr.Finish()
 
+	tr.LazyPrintf("input: %s", d)
 	w := new(wattUsage)
+
 	err := xml.Unmarshal(d, &w)
 	if err != nil {
 		parseErrors.Inc()
