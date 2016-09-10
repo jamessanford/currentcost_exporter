@@ -13,6 +13,7 @@ Defaults to `-dev /dev/ttyUSB0 -baud 57600`
 #### Metrics exported
 
 ```
+temperature_c 26.4
 temperature_f 79.5
 watts{channel="ch1"} 65
 watts{channel="ch2"} 320
@@ -26,7 +27,7 @@ currentcost_parse_errors 0
 #### XML input from serial port
 
 ```
-<msg><src>CC128-v0.15</src><dsb>01772</dsb><time>00:37:10</time><tmprF>79.5</tmprF><sensor>0</sensor><id>00865</id><type>1</type><ch1><watts>00065</watts></ch1><ch2><watts>00320</watts></ch2></msg>
+<msg><src>CC128-v0.15</src><dsb>01772</dsb><time>00:37:10</time><tmpr>26.4</tmpr><tmprF>79.5</tmprF><sensor>0</sensor><id>00865</id><type>1</type><ch1><watts>00065</watts></ch1><ch2><watts>00320</watts></ch2></msg>
 ```
 
 XML format definition from http://www.currentcost.com/cc128/xml.htm
