@@ -12,7 +12,7 @@ import (
 	"net/http"
 	"time"
 
-	"github.com/prometheus/client_golang/prometheus"
+	"github.com/prometheus/client_golang/prometheus/promhttp"
 	"github.com/prometheus/common/log"
 	"github.com/tarm/serial"
 	"golang.org/x/net/trace"
@@ -125,7 +125,7 @@ func main() {
 	http.HandleFunc("/", func(w http.ResponseWriter, _ *http.Request) {
 		_, _ = io.WriteString(w, "currentcost_exporter\n")
 	})
-	http.Handle("/metrics", prometheus.Handler())
+	http.Handle("/metrics", promhttp.Handler())
 	log.Infof("listening on %v", *httpAddr)
 	log.Fatal(http.ListenAndServe(*httpAddr, nil))
 }
