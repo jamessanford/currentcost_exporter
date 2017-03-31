@@ -8,18 +8,14 @@ import (
 	"bufio"
 	"encoding/xml"
 	"flag"
-	"io"
-	"net/http"
 	"time"
 
-	"github.com/prometheus/client_golang/prometheus/promhttp"
 	"github.com/prometheus/common/log"
 	"github.com/tarm/serial"
 	"golang.org/x/net/trace"
 )
 
 var (
-	httpAddr  = flag.String("http", ":6799", "listen on this address")
 	serialDev = flag.String("dev", "/dev/ttyUSB0", "serial port")
 	baudRate  = flag.Int("baud", 57600, "serial port baud rate")
 )
@@ -108,24 +104,4 @@ func readInput() {
 		tr.Errorf("scanner: %v", err)
 		log.Errorf("scanner: %v", err)
 	}
-}
-
-func main() {
-	flag.Parse()
-
-	go func() {
-		for {
-			readInput()
-			// readInput only returns in case of failure.
-			// On failure, back off before retrying.
-			time.Sleep(1 * time.Second)
-		}
-	}()
-
-	http.HandleFunc("/", func(w http.ResponseWriter, _ *http.Request) {
-		_, _ = io.WriteString(w, "currentcost_exporter\n")
-	})
-	http.Handle("/metrics", promhttp.Handler())
-	log.Infof("listening on %v", *httpAddr)
-	log.Fatal(http.ListenAndServe(*httpAddr, nil))
 }
