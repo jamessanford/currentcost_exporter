@@ -8,6 +8,7 @@ import (
 	"bufio"
 	"encoding/xml"
 	"flag"
+	"fmt"
 	"time"
 
 	"github.com/prometheus/common/log"
@@ -50,9 +51,9 @@ func parseWattLine(d []byte) {
 	tr := trace.New("parseWattLine", "xml")
 	defer tr.Finish()
 
-	tr.LazyPrintf("input: %s", d)
-	w := new(wattUsage)
+	tr.LazyPrintf(fmt.Sprintf("input: %s", d)) // don't leak 'd'.
 
+	w := new(wattUsage)
 	err := xml.Unmarshal(d, &w)
 	if err != nil {
 		parseErrors.Inc()
