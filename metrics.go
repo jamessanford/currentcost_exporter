@@ -52,6 +52,7 @@ var (
 )
 
 func init() {
+	prometheus.MustRegister(tempC)
 	prometheus.MustRegister(tempF)
 	prometheus.MustRegister(watts)
 
