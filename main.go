@@ -31,6 +31,7 @@ func main() {
 	}()
 
 	http.HandleFunc("/", func(w http.ResponseWriter, _ *http.Request) {
+		w.WriteHeader(http.StatusNotFound)
 		_, _ = io.WriteString(w, "currentcost_exporter\n")
 	})
 	http.Handle("/metrics", promhttp.Handler())
